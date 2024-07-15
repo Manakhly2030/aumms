@@ -22,6 +22,7 @@
   "workstation",
   "create_job_card",
   "job_card_created",
+  "view_job_card",
   "completed",
   "weight",
   "previous_stage_product",
@@ -80,7 +81,7 @@
    "read_only": 1
   },
   {
-   "depends_on": "eval:(doc.raw_material_available == 1 || (doc.previous_stage_completed == 1 && doc.is_raw_material_from_previous_stage_only == 1))",
+   "depends_on": "eval:((doc.raw_material_available==1 && doc.job_card_created == 0) || (doc.previous_stage_completed == 1 && doc.is_raw_material_from_previous_stage_only == 1 && doc.job_card_created == 0))",
    "fieldname": "create_job_card",
    "fieldtype": "Button",
    "label": "Create Job Card"
@@ -186,12 +187,18 @@
    "fieldtype": "Check",
    "hidden": 1,
    "label": "Is Last Stage"
+  },
+  {
+   "depends_on": "eval:(doc.job_card_created == 1)",
+   "fieldname": "view_job_card",
+   "fieldtype": "Button",
+   "label": "View Job Card"
   }
  ],
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2024-05-22 15:05:03.943903",
+ "modified": "2024-07-13 15:25:08.008254",
  "modified_by": "Administrator",
  "module": "AuMMS Manufacturing",
  "name": "Manufacturing Request Stage",

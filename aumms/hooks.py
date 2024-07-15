@@ -101,16 +101,16 @@ fixtures = [
 	},
 	{
 		"dt":"Workflow",
-		"filters":[["name","in",["Feasibility check"]]]
+		"filters":[["name","in",["Feasibility check"],["Manufacturing Stages Workflow"]]]
 	},
 	{
-		"dt":"Workflow Action Master",
-		"filters":[["name","in",["Submit for Feasibility check", "Approve", "Reject", "Submit", "Cancel"]]]
-	},
-	{
-		"dt":"Workflow State",
-		"filters":[["name","in",["Draft", "Submitted for feasibility", "Feasible", "Not Feasible", "Submitted", "Cancelled"]]]
-	},
+        "dt":"Workflow Action Master",
+        "filters":[["name","in",["Submit for Feasibility check", "Approve", "Reject", "Submit", "Confirm Order","Cancel","Start Manufacturing","Complete"]]]
+    },
+    {
+        "dt":"Workflow State",
+        "filters":[["name","in",["Draft", "Submitted for feasibility", "Feasible", "Not Feasible", "Order Confirmed", "Cancelled","Manufacturing Started","Completed"]]]
+    },
 	{
 		"dt":"Custom Field",
 		"filters": [["name", "in",["Department-head_of_department", "Employee-custom_warehouse", "Item Group-is_aumms_item_group", "Item Group-item_type", "Item Group-is_purity_item", "Item Group-making_charge_based_on", "Item Group-percentage", "Item Group-currency", "Item Group-is_sales_item", "Item Group-is_purchase_item", "Item-item_type", "Item-making_charge_based_on", "Item-making_charge_percentage", "Item-making_charge", "Item-purity_percentage", "Item-is_aumms_item", "Item-custom_item_qr_code", "Item-gold_weight", "Item-has_stone", "Item-stone_charge","Jewellery Invoice-custom_taxes_and_charges", "Jewellery Invoice-custom_sales_taxes_and_charges", "Jewellery Invoice-custom_total_taxes_and_charges_company_currency", "Jewellery Invoice-custom_total_taxes_and_charges", "Job Card-assigned_to", "Job Card-assigned_employee", "Purchase Invoice-keep_metal_ledger", "Purchase Receipt-party_link", "Purchase Receipt-keep_metal_ledger", "Purchase Receipt-create_invoice_on_submit", "Sales Invoice-keep_metal_ledger", "Sales Order-keep_metal_ledger", "Work Order-assigned_to", "Work Order-smith_name", "UOM-is_purity_uom", "Item-custom_is_raw_material","Purchase Invoice Item-item_type", "Purchase Invoice Item-is_purity_item", "Purchase Invoice Item-purity_percentage", "Purchase Invoice Item-purity", "Purchase Order Item-is_purity_item", "Purchase Order Item-purity", "Purchase Order Item-purity_percentage","Purchase Receipt Item-purity","Purchase Receipt Item-purity_percentage","Purchase Receipt Item-is_purity_item","Sales Invoice Item-purity","Sales Invoice Item-purity_percentage","Sales Invoice Item-is_purity_item","Sales Order Item-purity", "Sales Order Item-is_purity_item"]]]

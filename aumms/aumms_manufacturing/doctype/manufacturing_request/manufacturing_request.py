@@ -1,5 +1,3 @@
-# Copyright (c) 2024, efeone and contributors
-# For license information, please see license.txt
 import frappe
 from frappe import _
 from frappe.model.document import Document
@@ -10,9 +8,9 @@ class ManufacturingRequest(Document):
 
 	def autoname(self):
 		if self.request_from == "Jewellery Order":
-			self.title = f"{self.purity}  {self.expected_weight} {self.uom}  {self.type}  {self.category}"
-		elif self.request_from == "Raw Material Request" :
-			self.title = f"{self.purity}  {self.expected_weight} {self.uom}  {self.type}"
+			self.title = f"{self.purity} {self.expected_weight} {self.uom} {self.type} {self.category}"
+		elif self.request_from == "Raw Material Request":
+			self.title = f"{self.purity} {self.expected_weight} {self.uom} {self.type}"
 
 	def before_insert(self):
 		self.update_manufacturing_stages()
@@ -25,10 +23,10 @@ class ManufacturingRequest(Document):
 
 	def on_submit(self):
 		self.mark_as_finished_in_jewellery_order()
-		self.manufacturing_request_finished(finished = 1)
+		self.manufacturing_request_finished(finished=1)
 
 	def on_cancel(self):
-		self.manufacturing_request_finished(finished = 0)
+		self.manufacturing_request_finished(finished=0)
 
 	def update_manufacturing_stages(self):
 		if self.category:
@@ -48,9 +46,8 @@ class ManufacturingRequest(Document):
 				for_user = self.owner
 				create_notification_log(self.doctype, self.name, for_user, subject, content, 'Alert')
 
-
 	def mark_as_finished(self):
-		finished=1
+		finished = 1
 		for stage in self.manufacturing_stages:
 			if not stage.completed:
 				finished = 0
@@ -77,7 +74,6 @@ class ManufacturingRequest(Document):
 	    if frappe.db.exists('Jewellery Order', self.jewellery_order):
 	        jewellery_order = frappe.get_doc('Jewellery Order', self.jewellery_order)
 	        if jewellery_order:
-	            updated = False
 	            for item in jewellery_order.jewellery_order_items:
 	                if item.weight == self.expected_weight:
 	                    item.manufacturing_request_finished = finished
@@ -141,7 +137,7 @@ class ManufacturingRequest(Document):
 	            new_jewellery_job_card.is_last_stage = 1
 	        new_jewellery_job_card.flags.ignore_mandatory = True
 	        new_jewellery_job_card.save(ignore_permissions=True)
-	        frappe.db.set_value('Jewellery Job Card', self.manufacturing_request, 'product',self.product)
+	        frappe.db.set_value('Jewellery Job Card', self.manufacturing_request, 'product', self.product)
 	        frappe.db.set_value(stage.doctype, stage.name, 'job_card_created', 1)
 	        if smith_email:
 	            add_assignment({
@@ -150,5 +146,9 @@ class ManufacturingRequest(Document):
 	                "assign_to": [smith_email]
 	            })
 	        frappe.msgprint("Jewellery Job Card Created.", indicator="green", alert=1)
+	        return {
+	            "job_card_created": 1,
+	            "job_card": new_jewellery_job_card.name
+	        }
 	    else:
 	        frappe.throw(_("Job card already exists for this stage"))

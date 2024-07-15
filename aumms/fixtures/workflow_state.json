@@ -12,10 +12,28 @@
   "docstatus": 0,
   "doctype": "Workflow State",
   "icon": "",
+  "modified": "2024-07-03 15:32:37.584915",
+  "name": "Order Confirmed",
+  "style": "Success",
+  "workflow_state_name": "Order Confirmed"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow State",
+  "icon": "",
   "modified": "2024-04-03 16:42:13.775952",
   "name": "Not Feasible",
   "style": "Danger",
   "workflow_state_name": "Not Feasible"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow State",
+  "icon": "",
+  "modified": "2024-04-03 16:41:11.996612",
+  "name": "Feasible",
+  "style": "Primary",
+  "workflow_state_name": "Feasible"
  },
  {
   "docstatus": 0,
@@ -34,23 +52,5 @@
   "name": "Submitted for feasibility",
   "style": "Info",
   "workflow_state_name": "Submitted for feasibility"
- },
- {
-  "docstatus": 0,
-  "doctype": "Workflow State",
-  "icon": "",
-  "modified": "2024-04-03 16:41:11.996612",
-  "name": "Feasible",
-  "style": "Primary",
-  "workflow_state_name": "Feasible"
- },
- {
-  "docstatus": 0,
-  "doctype": "Workflow State",
-  "icon": "",
-  "modified": "2024-04-03 16:38:39.851460",
-  "name": "Submitted",
-  "style": "Success",
-  "workflow_state_name": "Submitted"
  }
 ]

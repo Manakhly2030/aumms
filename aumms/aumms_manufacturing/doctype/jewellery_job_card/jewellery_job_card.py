@@ -25,8 +25,7 @@ class JewelleryJobCard(Document):
             for item in raw_material_doc.items:
                 self.append('item_details', {
                     'item': item.item,
-                    'quantity': item.required_quantity,
-                    'weight':item.required_weight
+                    'quantity': item.quantity,
                 })
 
     def mark_as_completed(self, completed):
