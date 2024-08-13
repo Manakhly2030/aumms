@@ -66,8 +66,8 @@
    "fieldtype": "Float",
    "in_list_view": 1,
    "label": "Board Rate",
-   "precision": "2",
-   "reqd": 1
+   "mandatory_depends_on": "eval: doc.is_fix",
+   "precision": "2"
   },
   {
    "default": "Today",
@@ -105,7 +105,7 @@
    "reqd": 1
   },
   {
-   "default": "0",
+   "default": "1",
    "fieldname": "is_fix",
    "fieldtype": "Check",
    "label": "Fixed Charge"
@@ -119,7 +119,7 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2024-03-19 12:52:08.855007",
+ "modified": "2024-08-12 09:57:48.384926",
  "modified_by": "Administrator",
  "module": "AuMMS",
  "name": "Jewellery Receipt",

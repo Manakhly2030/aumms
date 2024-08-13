@@ -29,7 +29,7 @@ class AuMMSItem(Document):
 		if not self.stone_charge and self.is_stone_item:
 			frappe.throw(_('Please Enter Stone Charge'))"""
 	def validate_gold_weight(self):
-		if not self.gold_weight and not self.has_stone:
+		if not self.gold_weight and not self.is_stone_item:
 			frappe.throw("Gold Weight is mandatory")
 
 	def after_insert(self):

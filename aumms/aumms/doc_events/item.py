@@ -41,8 +41,9 @@ def uom_is_a_purity_uom(uom):
             uom: name of uom document
         output: a message iff uom is not a purity uom
     """
-    if not frappe.db.exists('UOM', {'name': uom, 'is_purity_uom': 1}):
-        frappe.throw(_('{} is not a purity uom'.format(uom)))
+    pass
+    # if not frappe.db.exists('UOM', {'name': uom, 'is_purity_uom': 1}):
+    #     frappe.throw(_('{} is not a purity uom'.format(uom)))
 
 @frappe.whitelist()
 def get_purity_uom():

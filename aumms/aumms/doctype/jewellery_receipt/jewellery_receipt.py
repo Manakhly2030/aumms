@@ -55,6 +55,7 @@ class JewelleryReceipt(Document):
             aumms_item.has_stone = item_detail.has_stone
             aumms_item.gold_weight = item_detail.gold_weight
             aumms_item.item_category = item_detail.item_category
+            aumms_item.is_purchase_item = 1
 
             if item_detail.has_stone:
                 if item_detail.single_stone:
@@ -96,8 +97,8 @@ class JewelleryReceipt(Document):
                     'board_rate': self.board_rate,
                     'qty': item_detail.gold_weight,
                     'uom': item_detail.uom,
-                    'stock_uom': item_detail.uom,
-                    'conversion_factor': 1,
+                    'stock_uom': "Nos",
+                    'conversion_factor': 1/item_detail.gold_weight,
                     'base_rate': self.board_rate,
                     'rate': item_detail.amount / item_detail.gold_weight,
                     'custom_making_charge': item_detail.making_charge,
