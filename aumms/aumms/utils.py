@@ -110,8 +110,8 @@ def create_metal_ledger_entries(doc, method=None):
 
                 if doc.doctype == 'Purchase Receipt':
                     # update balance_qty
-                    balance_qty = balance_qty+item.stock_qty if balance_qty else item.stock_qty
-                    fields['in_qty'] = item.qty
+                    balance_qty = balance_qty+item.total_weight if balance_qty else item.total_weight
+                    fields['in_qty'] = item.total_weight
                     fields['outgoing_rate'] = item.rate
                     fields['balance_qty'] = balance_qty
                     fields['amount'] = -item.amount
