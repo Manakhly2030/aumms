@@ -1,11 +1,8 @@
 # Copyright (c) 2024, efeone and contributors
 # For license information, please see license.txt
 import frappe
-from frappe.model import meta
-from frappe.utils import today
 from frappe.model.document import Document
-from frappe.model.naming import make_autoname
-from frappe.model.mapper import get_mapped_doc
+
 
 class JewelleryReceipt(Document):
 
@@ -95,10 +92,10 @@ class JewelleryReceipt(Document):
                     'item_code': item_detail.item_code,
                     'item_name': item_detail.item_code,
                     'board_rate': self.board_rate,
-                    'qty': item_detail.gold_weight,
-                    'uom': item_detail.uom,
-                    'stock_uom': "Nos",
-                    'conversion_factor': 1/item_detail.gold_weight,
+                    'qty': 1,
+                    'uom': "Nos",
+                    "weight_per_unit": item_detail.gold_weight,
+                    "weight_uom": item_detail.uom,
                     'base_rate': self.board_rate,
                     'rate': item_detail.amount / item_detail.gold_weight,
                     'custom_making_charge': item_detail.making_charge,

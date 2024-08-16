@@ -5,7 +5,7 @@
    "label": "Last Month Board Rate"
   }
  ],
- "content": "[{\"id\":\"xytMzcNTlF\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">AuMMS</span>\",\"col\":12}},{\"id\":\"jB5UHMdjpr\",\"type\":\"chart\",\"data\":{\"chart_name\":\"Last Month Board Rate\",\"col\":12}},{\"id\":\"gi-NMLZp61\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Board Rate\",\"col\":3}},{\"id\":\"UlF0vIuW_h\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"AuMMS Item\",\"col\":3}},{\"id\":\"hYF_ghyeVA\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"AuMMS Item Group\",\"col\":3}},{\"id\":\"UWuMllqZ2H\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Purity Conversion Tool\",\"col\":3}},{\"id\":\"aAr2ThZ43S\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Jewellery Invoice\",\"col\":3}},{\"id\":\"RvEzssIYXw\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Design Request\",\"col\":3}},{\"id\":\"wGYHyDla9N\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Design Analysis\",\"col\":3}},{\"id\":\"_LyZYOL-nL\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Bill of Materials\",\"col\":3}},{\"id\":\"5uZY95JpYz\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Work Order\",\"col\":3}},{\"id\":\"HvqBLZ1Lor\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Job Card\",\"col\":3}},{\"id\":\"9w8SYT0U69\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"7bvu06zTCN\",\"type\":\"paragraph\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>AuMMS Manufacturing</b></span>\",\"col\":12}},{\"id\":\"9t9kxybNJK\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Customer Jewellery Order\",\"col\":3}},{\"id\":\"06TYM1ppyy\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Jewellery Order\",\"col\":3}},{\"id\":\"O0JGHNHtrF\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Manufacturing Request\",\"col\":3}},{\"id\":\"2s8KvBILCm\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Raw Material Request\",\"col\":3}},{\"id\":\"MNE7fNKcwd\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Raw Material Bundle\",\"col\":3}},{\"id\":\"hEIbTGUk-V\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Jewellery Job Card\",\"col\":3}},{\"id\":\"cT93WyR0mJ\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Reports &amp; Masters</b></span>\",\"col\":12}},{\"id\":\"HkzazEK-HJ\",\"type\":\"card\",\"data\":{\"card_name\":\"Masters\",\"col\":4}},{\"id\":\"6hfzWxhLly\",\"type\":\"card\",\"data\":{\"card_name\":\"Settings\",\"col\":4}},{\"id\":\"GnDPsk1c5H\",\"type\":\"card\",\"data\":{\"card_name\":\"Reports\",\"col\":4}}]",
+ "content": "[{\"id\":\"xytMzcNTlF\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">AuMMS</span>\",\"col\":12}},{\"id\":\"jB5UHMdjpr\",\"type\":\"chart\",\"data\":{\"chart_name\":\"Last Month Board Rate\",\"col\":12}},{\"id\":\"gi-NMLZp61\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Board Rate\",\"col\":3}},{\"id\":\"UlF0vIuW_h\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"AuMMS Item\",\"col\":3}},{\"id\":\"hYF_ghyeVA\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"AuMMS Item Group\",\"col\":3}},{\"id\":\"UWuMllqZ2H\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Purity Conversion Tool\",\"col\":3}},{\"id\":\"aAr2ThZ43S\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Jewellery Invoice\",\"col\":3}},{\"id\":\"e9B31_-by6\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Jewellery Receipt\",\"col\":3}},{\"id\":\"RvEzssIYXw\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Design Request\",\"col\":3}},{\"id\":\"wGYHyDla9N\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Design Analysis\",\"col\":3}},{\"id\":\"_LyZYOL-nL\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Bill of Materials\",\"col\":3}},{\"id\":\"5uZY95JpYz\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Work Order\",\"col\":3}},{\"id\":\"HvqBLZ1Lor\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Job Card\",\"col\":3}},{\"id\":\"9w8SYT0U69\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"7bvu06zTCN\",\"type\":\"paragraph\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>AuMMS Manufacturing</b></span>\",\"col\":12}},{\"id\":\"9t9kxybNJK\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Customer Jewellery Order\",\"col\":3}},{\"id\":\"06TYM1ppyy\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Jewellery Order\",\"col\":3}},{\"id\":\"O0JGHNHtrF\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Manufacturing Request\",\"col\":3}},{\"id\":\"2s8KvBILCm\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Raw Material Request\",\"col\":3}},{\"id\":\"MNE7fNKcwd\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Raw Material Bundle\",\"col\":3}},{\"id\":\"hEIbTGUk-V\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Jewellery Job Card\",\"col\":3}},{\"id\":\"cT93WyR0mJ\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Reports &amp; Masters</b></span>\",\"col\":12}},{\"id\":\"HkzazEK-HJ\",\"type\":\"card\",\"data\":{\"card_name\":\"Masters\",\"col\":4}},{\"id\":\"6hfzWxhLly\",\"type\":\"card\",\"data\":{\"card_name\":\"Settings\",\"col\":4}},{\"id\":\"GnDPsk1c5H\",\"type\":\"card\",\"data\":{\"card_name\":\"Reports\",\"col\":4}}]",
  "creation": "2023-01-06 12:02:34.084523",
  "custom_blocks": [],
  "docstatus": 0,
@@ -152,7 +152,7 @@
    "type": "Link"
   }
  ],
- "modified": "2024-05-06 10:24:40.490084",
+ "modified": "2024-08-16 09:28:21.176711",
  "modified_by": "Administrator",
  "module": "AuMMS",
  "name": "AuMMS",
@@ -164,6 +164,14 @@
  "roles": [],
  "sequence_id": 1.0,
  "shortcuts": [
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Jewellery Receipt",
+   "link_to": "Jewellery Receipt",
+   "stats_filter": "[]",
+   "type": "DocType"
+  },
   {
    "color": "Grey",
    "doc_view": "List",
