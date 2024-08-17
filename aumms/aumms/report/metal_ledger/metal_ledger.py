@@ -2,10 +2,13 @@
 # For license information, please see license.txt
 
 from __future__ import unicode_literals
+
 import frappe
-from frappe.utils import *
 from frappe import _
-from aumms.aumms.utils import get_party_link_if_exist, get_conversion_factor
+from frappe.utils.data import get_datetime, getdate
+
+from aumms.aumms.utils import get_conversion_factor, get_party_link_if_exist
+
 
 def execute(filters=None):
 	columns, data = get_columns(filters), get_data(filters)
@@ -15,12 +18,12 @@ def get_columns(filters):
 	''' Method to get columns in report '''
 	columns = [
 		{'label': _('Posting Date'), 'fieldtype': 'Date', 'width': 110},
-	    {'label': _('Item Code'), 'fieldtype': 'Link', 'options': 'Item', 'width': 110},
+		{'label': _('Item Code'), 'fieldtype': 'Link', 'options': 'Item', 'width': 110},
 		{'label': _('Party Type'), 'fieldname': 'party_type', 'fieldtype': 'Link', 'options': 'DocType'},
 		{'label': _('Party'), 'fieldtype': 'Dynamic Link', 'options': 'party_type', 'width': 130},
 		{'label': _('Item Type'), 'fieldtype': 'Link', 'options': 'Item Type', 'width': 100},
-		{'label': _('Purity'), 'fieldtype': 'Link', 'options': 'Purity', 'width': 75},
-		{'label': _('Stock UOM'), 'fieldtype': 'Link', 'options': 'UOM', 'width': 100},
+		{'label': _('Purity of Transaction'), 'fieldtype': 'Link', 'options': 'Purity', 'width': 175},
+		{'label': _('Weight UOM'), 'fieldtype': 'Link', 'options': 'UOM', 'width': 100},
 		{'label': _('In Quantity'), 'fieldname': 'in_qty', 'fieldtype': 'Float', 'width': 100},
 		{'label': _('Out Quantity'), 'fieldname': 'out_qty', 'fieldtype': 'Float', 'width': 120},
 		{'label': _('Voucher Type'), 'fieldtype': 'Link', 'options': 'DocType', 'fieldname': 'voucher_type', 'hidden': 1},
@@ -58,6 +61,8 @@ def get_data(filters):
 			doc.amount,
 			doc.posting_time
 		]
+		if filters.purity:
+			row[7], row[8] = get_purity_converted_qty(doc.purity, doc.in_qty, doc.out_qty, filters.purity)
 		if filters.purity and filters.uom:
 			balance_qty = get_balance_qty(doc.creation, doc.item_type, doc.party_link, filters.purity, filters.uom)
 			row.insert(9, balance_qty)
@@ -115,15 +120,17 @@ def get_balance_qty(creation, item_type, party_link, purity, uom):
 	"""
 	ledgers = frappe.db.get_all('Metal Ledger Entry',
 		filters = {
-			'creation': ['<=', creation],
+			'creation': ['<=', get_datetime(creation)],
 			'item_type': item_type,
-			'party_link': party_link,
+			'party': party_link,
 			'is_cancelled': 0
 		},
 		fields = [
 			'in_qty', 'out_qty', 'stock_uom', 'purity_percentage', 'purity'
-		]
+		],
 	)
+
+	print(ledgers)
 
 	balance = 0
 	purity_percentage = frappe.db.get_value('Purity', purity, 'purity_percentage')
@@ -151,3 +158,12 @@ def get_balance_qty(creation, item_type, party_link, purity, uom):
 				purity_converted_qty = (qty * float(ledger.purity_percentage))/float(purity_percentage)
 				balance += purity_converted_qty
 	return balance
+
+def get_purity_converted_qty(ledger_purity, in_qty, out_qty, filter_purity):
+	if ledger_purity == filter_purity:
+		return in_qty, out_qty
+	ledger_purity_percentage = frappe.db.get_value('Purity', ledger_purity, 'purity_percentage')
+	filter_purity_percentage = frappe.db.get_value('Purity', filter_purity, 'purity_percentage')
+	purity_converted_in_qty = (in_qty * ledger_purity_percentage)/filter_purity_percentage
+	purity_converted_out_qty = (out_qty * ledger_purity_percentage)/filter_purity_percentage
+	return purity_converted_in_qty, purity_converted_out_qty
