@@ -101,15 +101,15 @@ fixtures = [
 	},
 	{
 		"dt":"Workflow",
-		"filters":[["name","in",["Feasibility check"]]]
+		"filters":[["name","in",["Feasibility check", "Touch Validation Workflow"]]]
 	},
 	{
 		"dt":"Workflow Action Master",
-		"filters":[["name","in",["Submit for Feasibility check", "Approve", "Reject", "Submit", "Cancel"]]]
+		"filters":[["name","in",["Submit for Feasibility check", "Approve", "Reject", "Submit", "Cancel", "Review"]]]
 	},
 	{
 		"dt":"Workflow State",
-		"filters":[["name","in",["Draft", "Submitted for feasibility", "Feasible", "Not Feasible", "Submitted", "Cancelled"]]]
+		"filters":[["name","in",["Draft", "Submitted for feasibility", "Feasible", "Not Feasible", "Submitted", "Cancelled", "Manager Approved", "Manager Rejected", "Director Approved", "Director Rejected", "Sent to Director", "Sent to Manager"]]]
 	},
 	{
 		"dt":"Custom Field",
