@@ -19,6 +19,7 @@
   "quantity",
   "section_break_vxux",
   "item_details",
+  "item_wise_stone_details",
   "amended_from"
  ],
  "fields": [
@@ -114,12 +115,19 @@
    "fieldname": "quantity",
    "fieldtype": "Int",
    "label": "Quantity"
+  },
+  {
+   "fieldname": "item_wise_stone_details",
+   "fieldtype": "Table",
+   "label": "Item Wise Stone Details",
+   "options": "Item Wise Stone Details",
+   "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2024-08-12 09:57:48.384926",
+ "modified": "2024-08-20 10:13:09.368757",
  "modified_by": "Administrator",
  "module": "AuMMS",
  "name": "Jewellery Receipt",
