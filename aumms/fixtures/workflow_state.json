@@ -3,64 +3,28 @@
   "docstatus": 0,
   "doctype": "Workflow State",
   "icon": "",
-  "modified": "2024-08-17 09:54:56.366256",
-  "name": "Manager Approved",
+  "modified": "2024-08-21 16:35:55.872427",
+  "name": "Sent for Hallmarking",
   "style": "",
-  "workflow_state_name": "Manager Approved"
+  "workflow_state_name": "Sent for Hallmarking"
  },
  {
   "docstatus": 0,
   "doctype": "Workflow State",
   "icon": "",
-  "modified": "2024-08-17 09:55:21.124422",
-  "name": "Director Approved",
+  "modified": "2024-08-21 16:36:26.424663",
+  "name": "Send for Hallmarking",
   "style": "",
-  "workflow_state_name": "Director Approved"
+  "workflow_state_name": "Send for Hallmarking"
  },
  {
   "docstatus": 0,
   "doctype": "Workflow State",
   "icon": "",
-  "modified": "2024-04-03 16:38:15.882848",
-  "name": "Cancelled",
-  "style": "Danger",
-  "workflow_state_name": "Cancelled"
- },
- {
-  "docstatus": 0,
-  "doctype": "Workflow State",
-  "icon": "",
-  "modified": "2024-04-03 16:42:13.775952",
-  "name": "Not Feasible",
-  "style": "Danger",
-  "workflow_state_name": "Not Feasible"
- },
- {
-  "docstatus": 0,
-  "doctype": "Workflow State",
-  "icon": "",
-  "modified": "2024-03-19 15:18:22.775660",
-  "name": "Draft",
+  "modified": "2024-08-21 16:37:27.681823",
+  "name": "Items Hallmarked",
   "style": "",
-  "workflow_state_name": "Draft"
- },
- {
-  "docstatus": 0,
-  "doctype": "Workflow State",
-  "icon": "",
-  "modified": "2024-04-03 16:41:50.343879",
-  "name": "Submitted for feasibility",
-  "style": "Info",
-  "workflow_state_name": "Submitted for feasibility"
- },
- {
-  "docstatus": 0,
-  "doctype": "Workflow State",
-  "icon": "",
-  "modified": "2024-04-03 16:41:11.996612",
-  "name": "Feasible",
-  "style": "Primary",
-  "workflow_state_name": "Feasible"
+  "workflow_state_name": "Items Hallmarked"
  },
  {
   "docstatus": 0,
@@ -75,36 +39,9 @@
   "docstatus": 0,
   "doctype": "Workflow State",
   "icon": "",
-  "modified": "2024-08-17 09:55:11.949764",
-  "name": "Manager Rejected",
+  "modified": "2024-03-19 15:18:22.775660",
+  "name": "Draft",
   "style": "",
-  "workflow_state_name": "Manager Rejected"
- },
- {
-  "docstatus": 0,
-  "doctype": "Workflow State",
-  "icon": "",
-  "modified": "2024-08-17 09:55:29.661675",
-  "name": "Director Rejected",
-  "style": "",
-  "workflow_state_name": "Director Rejected"
- },
- {
-  "docstatus": 0,
-  "doctype": "Workflow State",
-  "icon": "",
-  "modified": "2024-08-17 09:57:36.148349",
-  "name": "Sent to Manager",
-  "style": "",
-  "workflow_state_name": "Sent to Manager"
- },
- {
-  "docstatus": 0,
-  "doctype": "Workflow State",
-  "icon": "",
-  "modified": "2024-08-17 09:55:49.566647",
-  "name": "Sent to Director",
-  "style": "",
-  "workflow_state_name": "Sent to Director"
+  "workflow_state_name": "Draft"
  }
 ]
