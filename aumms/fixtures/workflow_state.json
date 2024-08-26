@@ -75,33 +75,6 @@
   "docstatus": 0,
   "doctype": "Workflow State",
   "icon": "",
-  "modified": "2024-08-17 09:57:36.148349",
-  "name": "Sent to Manager",
-  "style": "",
-  "workflow_state_name": "Sent to Manager"
- },
- {
-  "docstatus": 0,
-  "doctype": "Workflow State",
-  "icon": "",
-  "modified": "2024-08-17 09:55:49.566647",
-  "name": "Sent to Director",
-  "style": "",
-  "workflow_state_name": "Sent to Director"
- },
- {
-  "docstatus": 0,
-  "doctype": "Workflow State",
-  "icon": "",
-  "modified": "2024-08-21 16:35:55.872427",
-  "name": "Sent for Hallmarking",
-  "style": "",
-  "workflow_state_name": "Sent for Hallmarking"
- },
- {
-  "docstatus": 0,
-  "doctype": "Workflow State",
-  "icon": "",
   "modified": "2024-08-21 16:36:26.424663",
   "name": "Send for Hallmarking",
   "style": "",
@@ -120,6 +93,24 @@
   "docstatus": 0,
   "doctype": "Workflow State",
   "icon": "",
+  "modified": "2024-08-17 09:57:36.148349",
+  "name": "Sent to Manager",
+  "style": "",
+  "workflow_state_name": "Sent to Manager"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow State",
+  "icon": "",
+  "modified": "2024-08-17 09:55:49.566647",
+  "name": "Sent to Director",
+  "style": "",
+  "workflow_state_name": "Sent to Director"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow State",
+  "icon": "",
   "modified": "2024-04-03 16:38:39.851460",
   "name": "Submitted",
   "style": "Success",
@@ -133,5 +124,14 @@
   "name": "Draft",
   "style": "",
   "workflow_state_name": "Draft"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow State",
+  "icon": "",
+  "modified": "2024-08-21 16:35:55.872427",
+  "name": "Sent for Hallmarking",
+  "style": "",
+  "workflow_state_name": "Sent for Hallmarking"
  }
 ]
