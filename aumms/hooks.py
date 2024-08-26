@@ -101,15 +101,15 @@ fixtures = [
 	},
 	{
 		"dt":"Workflow",
-		"filters":[["name","in",["Feasibility check", "Touch Validation Workflow"]]]
+		"filters":[["name","in",["Feasibility check", "Touch Validation Workflow", "Purchase Receipt Workflow"]]]
 	},
 	{
 		"dt":"Workflow Action Master",
-		"filters":[["name","in",["Submit for Feasibility check", "Approve", "Reject", "Submit", "Cancel", "Review"]]]
+		"filters":[["name","in",["Send for Hallmarking", "Hallmark Items Return", "Submit for Feasibility check", "Approve", "Reject", "Submit", "Cancel", "Review"]]]
 	},
 	{
 		"dt":"Workflow State",
-		"filters":[["name","in",["Draft", "Submitted for feasibility", "Feasible", "Not Feasible", "Submitted", "Cancelled", "Manager Approved", "Manager Rejected", "Director Approved", "Director Rejected", "Sent to Director", "Sent to Manager"]]]
+		"filters":[["name","in",["Draft", "Submitted", "Sent for Hallmarking", "Send for Hallmarking", "Items Hallmarked", "Submitted for feasibility", "Feasible", "Not Feasible", "Submitted", "Cancelled", "Manager Approved", "Manager Rejected", "Director Approved", "Director Rejected", "Sent to Director", "Sent to Manager"]]]
 	},
 	{
 		"dt":"Custom Field",
@@ -164,7 +164,8 @@ doc_events = {
 			'aumms.aumms.utils.create_metal_ledger_entries',
 			'aumms.aumms.doc_events.purchase_receipt.purchase_receipt_on_submit'
 			],
-		'on_cancel': 'aumms.aumms.utils.cancel_metal_ledger_entries'
+		'on_cancel': 'aumms.aumms.utils.cancel_metal_ledger_entries',
+		'on_update_after_submit': 'aumms.aumms.doc_events.purchase_receipt.purchase_receipt_on_update_after_submit'
 	},
 	'Sales Invoice': {
 		'on_submit': [

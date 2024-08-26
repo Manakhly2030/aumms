@@ -6,6 +6,150 @@ def purchase_receipt_on_submit(doc, method):
     ''' Method to trigger Purchase Receipt on_submit '''
     if doc.create_invoice_on_submit:
         create_purchase_invoice(doc)
+        
+def purchase_receipt_on_update_after_submit(doc, method=None):
+    print("\n", doc.workflow_state, "\n")
+    print(doc.workflow_state == "Sent for Hallmarking", doc.custom_hallmarking_details, not doc.custom_hallmark_return)
+    if doc.workflow_state == "Sent for Hallmarking" and not doc.custom_sent_for_hallmarking:
+        hallmarking_entry = frappe.new_doc("Stock Entry")
+        hallmarking_entry.stock_entry_type = "Material Transfer"
+        hallmarking_entry.from_warehouse = frappe.db.exists("Warehouse", {"name":["like", "%Stores%"]})
+        hallmarking_entry.to_warehouse = frappe.db.exists("Warehouse", {"name":["like", "%Work In Progress%"]})
+        for item in doc.items:
+            hallmarking_entry.append("items", {
+                "item_code": item.item_code,
+                "qty": item.qty,
+                "uom": item.uom,
+                "basic_rate": item.base_rate,
+                "additional_cost": frappe.db.get_single_value("AuMMS Settings", "hallmarking_cost_per_item")
+            })
+        hallmarking_entry.submit()
+        create_metal_ledger_entries_for_hallmarking(doc, False)
+        doc.custom_sent_for_hallmarking = 1
+        doc.save()
+    elif doc.workflow_state == "Sent for Hallmarking" and doc.custom_hallmarking_details and not doc.custom_hallmark_return:
+        hallmarked_entry = frappe.new_doc("Stock Entry")
+        hallmarked_entry.stock_entry_type = "Material Transfer"
+        hallmarked_entry.from_warehouse = frappe.db.exists("Warehouse", {"name":["like", "%Work In Progress%"]})
+        hallmarked_entry.to_warehouse = frappe.db.exists("Warehouse", {"name":["like", "%Finished Goods%"]})
+        for item in doc.custom_hallmarking_details:
+            if not item.broken:
+                hallmarked_entry.append("items", {
+                    "item_code": item.item_code,
+                    "qty": frappe.db.get_value("Purchase Receipt Item", {"item_code": item.item_code, "parent":doc.name}, "qty"),
+                    "uom": frappe.db.get_value("Purchase Receipt Item", {"item_code": item.item_code, "parent":doc.name}, "uom"),
+                    "basic_rate": frappe.db.get_value("Purchase Receipt Item", {"item_code": item.item_code, "parent":doc.name}, "base_rate"),
+                })
+                frappe.db.get_value("AuMMS Item", item.item_code, "hallmarked", 1)
+            else:
+                hallmarked_entry.append("items", {
+                    "item_code": item.item_code,
+                    "qty": frappe.db.get_value("Purchase Receipt Item", {"item_code": item.item_code, "parent":doc.name}, "qty"),
+                    "uom": frappe.db.get_value("Purchase Receipt Item", {"item_code": item.item_code, "parent":doc.name}, "uom"),
+                    "basic_rate": frappe.db.get_value("Purchase Receipt Item", {"item_code": item.item_code, "parent":doc.name}, "base_rate"),
+                    "t_warehouse": frappe.db.exists("Warehouse", {"name":["like", "%Scrap%"]})
+                })
+        hallmarked_entry.submit()
+        create_metal_ledger_entries_for_hallmarking(doc, True)
+        doc.custom_hallmark_return = 1
+        doc.workflow_state = "Items Hallmarked"
+        doc.save()
+        
+@frappe.whitelist()
+def create_metal_ledger_entries_for_hallmarking(doc, hallmark_return=False):
+    """
+        method to create metal ledger entries
+        args:
+            doc: object of purchase Receipt doctype and Sales Invoice doctype
+            method: on submit of purchase reciept and Sales Invoice
+        output:
+            new metal ledger entry doc
+    """
+
+    # get default company
+    company = frappe.defaults.get_defaults().company
+
+    # set dict of fields for metal ledger entry
+    fields = {
+        'doctype': 'Metal Ledger Entry',
+        'posting_date': frappe.utils.get_datetime().date(),
+        'posting_time': frappe.utils.get_datetime().time(),
+        'voucher_type': doc.doctype,
+        'voucher_no': doc.name,
+        'company': company,
+        'party_link': doc.party_link
+    }
+
+    # set party type and party in fields if doctype is Purchase Receipt
+    if doc.doctype == 'Purchase Receipt':
+        fields['party_type'] = 'Supplier'
+        fields['party'] = doc.supplier
+
+    # check items is keep_metal_ledger
+    if doc.keep_metal_ledger:
+        # declare ledger_created as false
+        ledger_created = 0
+        for h_item in doc.custom_hallmarking_details:
+                for item in doc.items:
+                    if item.item_code == h_item.item_code:
+                        break
+            
+                aumms_item_doc = frappe.get_doc("AuMMS Item", item.item_code)
+
+                # set item details in fields
+                fields['item_code'] = item.item_code
+                fields['item_name'] = item.item_name
+                fields['stock_uom'] = item.weight_uom
+                fields['purity'] = aumms_item_doc.purity
+                fields['purity_percentage'] = aumms_item_doc.purity_percentage
+                fields['board_rate'] = item.rate
+                fields['batch_no'] = item.batch_no
+                fields['item_type'] = aumms_item_doc.item_type
+                # get balance qty of the item for this party
+                filters = {
+                    'item_type': aumms_item_doc.item_type,
+                    'purity': aumms_item_doc.purity,
+                    'stock_uom': item.weight_uom,
+                    'party_link': doc.party_link,
+                    'is_cancelled': 0
+                    }
+                balance_qty = frappe.db.get_value('Metal Ledger Entry', filters, 'balance_qty')
+
+                if hallmark_return:
+                    # update balance_qtydirection
+                    balance_qty = balance_qty+item.total_weight if balance_qty else item.total_weight
+                    fields['in_qty'] = item.total_weight
+                    if h_item.gold_weight_loss:
+                        if h_item.gold_weight_loss > 0:
+                            fields['in_qty'] = item.total_weight - h_item.gold_weight_loss
+                            aumms_item_doc.weight_per_unit - h_item.gold_weight_loss
+                            aumms_item_doc.gold_weight - h_item.gold_weight_loss
+                    fields['outgoing_rate'] = item.rate
+                    fields['balance_qty'] = balance_qty
+                    fields['amount'] = -item.amount
+
+                else:
+                    # update balance_qty
+                    balance_qty = balance_qty-item.total_weight if balance_qty else -item.total_weight
+                    fields['incoming_rate'] = item.rate
+                    fields['out_qty'] = item.total_weight
+                    fields['balance_qty'] = balance_qty
+                    fields['amount'] = item.amount
+
+                # create metal ledger entry doc with fields
+                aumms_item_doc.save()
+                frappe.get_doc(fields).insert(ignore_permissions = 1)
+                ledger_created = 1
+
+        # alert message if metal ledger is created
+        if ledger_created:
+            frappe.msgprint(
+                msg = _(
+                    'Metal Ledger Entry is created.'
+                ),
+                indicator="green",
+                alert = 1
+            )
 
 @frappe.whitelist()
 def create_purchase_invoice(doc):

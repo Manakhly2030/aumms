@@ -9,6 +9,10 @@
  "engine": "InnoDB",
  "field_order": [
   "details_tab",
+  "hallmark_reference",
+  "column_break_zxwm",
+  "hallmarked",
+  "section_break_bafp",
   "item_code",
   "item_name",
   "item_group",
@@ -364,11 +368,33 @@
    "fieldname": "is_raw_material",
    "fieldtype": "Check",
    "label": "Is Raw Material"
+  },
+  {
+   "fieldname": "hallmark_reference",
+   "fieldtype": "Link",
+   "label": "Hallmark Reference",
+   "options": "Stock Entry",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_zxwm",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "hallmarked",
+   "fieldtype": "Check",
+   "label": "Hallmarked",
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_break_bafp",
+   "fieldtype": "Section Break"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-03-28 09:47:38.898756",
+ "modified": "2024-08-21 14:58:58.051356",
  "modified_by": "Administrator",
  "module": "AuMMS",
  "name": "AuMMS Item",

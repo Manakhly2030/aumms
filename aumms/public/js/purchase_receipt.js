@@ -8,6 +8,9 @@ frappe.ui.form.on('Purchase Receipt', {
         frappe.set_route('query-report', 'Metal Ledger', { 'voucher_no': frm.doc.name });
       }, 'View');
     }
+
+    handle_hallmark_return_button(frm)
+
   },
 
     posting_date(frm) {
@@ -130,4 +133,48 @@ let set_board_rate_read_only = function (frm, cdt, cdn) {
         }
       }
     })
+}
+
+function handle_hallmark_return_button(frm) {
+  frm.add_custom_button("Mark Hallmark Return", function () {
+    // let d = new frappe.ui.Dialog({
+    //   title: "Enter details",
+    //   fields: [
+    //     {
+    //       label: "Items",
+    //       fieldname: "hallmark_items",
+    //       fieldtype: "Table",
+    //       fields: [
+    //         {
+    //           label: "Item Code",
+    //           fieldname: "item_code",
+    //           fieldtype: "Link",
+    //           options: "Item",
+    //           in_list_view: 1,
+    //         },
+    //         {
+    //           label: "Broken",
+    //           fieldname: "broken",
+    //           fieldtype: "Check",
+    //           in_list_view: 1,
+    //         },
+    //       ],
+    //     },
+    //   ],
+    //   size: "large", // small, large, extra-large
+    //   primary_action_label: "Submit",
+    //   primary_action(values) {
+    //     console.log(values);
+    //     d.hide();
+    //   },
+    // });
+
+    // d.show();
+    frm.doc.items.forEach(element => {
+      frm.add_child("custom_hallmarking_details", {
+        item_code: element.item_code,
+      })
+      frm.refresh_fields()
+    });
+  });
 }

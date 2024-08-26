@@ -146,10 +146,13 @@ class JewelleryReceipt(Document):
 			frappe.db.commit()
 
 	def validate_touch(self):
-		touch = frappe.db.get_value("Supplier", self.supplier, "custom_touch_percentage")
+		touch = frappe.db.get_value("Supplier Touch Record", {"parent":self.supplier, "item_group":self.item_group}, "touch_percent")
+		if not touch:
+			frappe.throw(msg=f"Please set Touch Percentage for {self.item_category} for {self.supplier}", title="Message")
+			return None
 		need_approval = False
 		for item in self.item_details:
-			if item.making_chargein_percentage > touch:
+			if item.making_chargein_percentage != touch:
 				if self.workflow_state == "Draft":
 					frappe.msgprint("Please send to Manager for Approval")
 				need_approval = True

@@ -39,15 +39,6 @@
   "docstatus": 0,
   "doctype": "Workflow State",
   "icon": "",
-  "modified": "2024-03-19 15:18:22.775660",
-  "name": "Draft",
-  "style": "",
-  "workflow_state_name": "Draft"
- },
- {
-  "docstatus": 0,
-  "doctype": "Workflow State",
-  "icon": "",
   "modified": "2024-04-03 16:41:50.343879",
   "name": "Submitted for feasibility",
   "style": "Info",
@@ -61,15 +52,6 @@
   "name": "Feasible",
   "style": "Primary",
   "workflow_state_name": "Feasible"
- },
- {
-  "docstatus": 0,
-  "doctype": "Workflow State",
-  "icon": "",
-  "modified": "2024-04-03 16:38:39.851460",
-  "name": "Submitted",
-  "style": "Success",
-  "workflow_state_name": "Submitted"
  },
  {
   "docstatus": 0,
@@ -106,5 +88,50 @@
   "name": "Sent to Director",
   "style": "",
   "workflow_state_name": "Sent to Director"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow State",
+  "icon": "",
+  "modified": "2024-08-21 16:35:55.872427",
+  "name": "Sent for Hallmarking",
+  "style": "",
+  "workflow_state_name": "Sent for Hallmarking"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow State",
+  "icon": "",
+  "modified": "2024-08-21 16:36:26.424663",
+  "name": "Send for Hallmarking",
+  "style": "",
+  "workflow_state_name": "Send for Hallmarking"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow State",
+  "icon": "",
+  "modified": "2024-08-21 16:37:27.681823",
+  "name": "Items Hallmarked",
+  "style": "",
+  "workflow_state_name": "Items Hallmarked"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow State",
+  "icon": "",
+  "modified": "2024-04-03 16:38:39.851460",
+  "name": "Submitted",
+  "style": "Success",
+  "workflow_state_name": "Submitted"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow State",
+  "icon": "",
+  "modified": "2024-03-19 15:18:22.775660",
+  "name": "Draft",
+  "style": "",
+  "workflow_state_name": "Draft"
  }
 ]

@@ -265,9 +265,11 @@ def get_purity_converted_qty(ledger_purity, in_qty, out_qty, filter_purity):
 	filter_purity_percentage = frappe.db.get_value(
 		"Purity", filter_purity, "purity_percentage"
 	)
-	purity_converted_in_qty = (
-		in_qty * ledger_purity_percentage
-	) / filter_purity_percentage
+	purity_converted_in_qty = 0
+	if in_qty:
+		purity_converted_in_qty = (
+			in_qty * ledger_purity_percentage
+		) / filter_purity_percentage
 	purity_converted_out_qty = (
 		out_qty * ledger_purity_percentage
 	) / filter_purity_percentage
