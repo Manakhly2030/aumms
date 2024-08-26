@@ -1,0 +1,117 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2024-08-26 12:45:24.340296",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "section_break_ey9e",
+  "amended_from",
+  "from",
+  "reference",
+  "supplier",
+  "hallmarking_cost",
+  "items",
+  "total_hallmarking_cost",
+  "total_gold_value",
+  "total_items_value",
+  "total_gold_weight",
+  "total_weight"
+ ],
+ "fields": [
+  {
+   "fieldname": "section_break_ey9e",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Hallmark Request",
+   "print_hide": 1,
+   "read_only": 1,
+   "search_index": 1
+  },
+  {
+   "fieldname": "from",
+   "fieldtype": "Link",
+   "label": "From",
+   "options": "DocType"
+  },
+  {
+   "fieldname": "reference",
+   "fieldtype": "Dynamic Link",
+   "label": "Reference",
+   "options": "from"
+  },
+  {
+   "fieldname": "supplier",
+   "fieldtype": "Link",
+   "label": "Supplier",
+   "options": "Supplier"
+  },
+  {
+   "fieldname": "hallmarking_cost",
+   "fieldtype": "Currency",
+   "label": "Hallmarking Cost"
+  },
+  {
+   "fieldname": "total_hallmarking_cost",
+   "fieldtype": "Currency",
+   "label": "Total Hallmarking Cost"
+  },
+  {
+   "fieldname": "total_gold_value",
+   "fieldtype": "Currency",
+   "label": "Total Gold Value"
+  },
+  {
+   "fieldname": "total_items_value",
+   "fieldtype": "Currency",
+   "label": "Total Items Value"
+  },
+  {
+   "fieldname": "total_gold_weight",
+   "fieldtype": "Float",
+   "label": "Total Gold Weight"
+  },
+  {
+   "fieldname": "total_weight",
+   "fieldtype": "Float",
+   "label": "Total Weight"
+  },
+  {
+   "fieldname": "items",
+   "fieldtype": "Table",
+   "label": "Items",
+   "options": "Hallmark Items"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [],
+ "modified": "2024-08-26 14:37:16.557436",
+ "modified_by": "Administrator",
+ "module": "AuMMS",
+ "name": "Hallmark Request",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}
