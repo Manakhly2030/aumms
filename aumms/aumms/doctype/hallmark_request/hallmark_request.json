@@ -6,7 +6,6 @@
  "engine": "InnoDB",
  "field_order": [
   "section_break_ey9e",
-  "amended_from",
   "from",
   "reference",
   "supplier",
@@ -22,16 +21,6 @@
   {
    "fieldname": "section_break_ey9e",
    "fieldtype": "Section Break"
-  },
-  {
-   "fieldname": "amended_from",
-   "fieldtype": "Link",
-   "label": "Amended From",
-   "no_copy": 1,
-   "options": "Hallmark Request",
-   "print_hide": 1,
-   "read_only": 1,
-   "search_index": 1
   },
   {
    "fieldname": "from",
@@ -59,7 +48,8 @@
   {
    "fieldname": "total_hallmarking_cost",
    "fieldtype": "Currency",
-   "label": "Total Hallmarking Cost"
+   "label": "Total Hallmarking Cost",
+   "precision": "0"
   },
   {
    "fieldname": "total_gold_value",
@@ -69,17 +59,20 @@
   {
    "fieldname": "total_items_value",
    "fieldtype": "Currency",
-   "label": "Total Items Value"
+   "label": "Total Items Value",
+   "precision": "0"
   },
   {
    "fieldname": "total_gold_weight",
    "fieldtype": "Float",
-   "label": "Total Gold Weight"
+   "label": "Total Gold Weight",
+   "precision": "3"
   },
   {
    "fieldname": "total_weight",
    "fieldtype": "Float",
-   "label": "Total Weight"
+   "label": "Total Weight",
+   "precision": "3"
   },
   {
    "fieldname": "items",
@@ -91,7 +84,7 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2024-08-26 14:37:16.557436",
+ "modified": "2024-08-26 15:06:21.308360",
  "modified_by": "Administrator",
  "module": "AuMMS",
  "name": "Hallmark Request",
