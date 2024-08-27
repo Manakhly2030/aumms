@@ -15,7 +15,8 @@
   "total_gold_value",
   "total_items_value",
   "total_gold_weight",
-  "total_weight"
+  "total_weight",
+  "amended_from"
  ],
  "fields": [
   {
@@ -79,12 +80,22 @@
    "fieldtype": "Table",
    "label": "Items",
    "options": "Hallmark Items"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Hallmark Request",
+   "print_hide": 1,
+   "read_only": 1,
+   "search_index": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2024-08-26 15:06:21.308360",
+ "modified": "2024-08-27 09:25:07.827291",
  "modified_by": "Administrator",
  "module": "AuMMS",
  "name": "Hallmark Request",
