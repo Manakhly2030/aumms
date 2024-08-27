@@ -74,12 +74,14 @@
   {
    "fieldname": "total_gold_weight",
    "fieldtype": "Float",
-   "label": "Total Gold Weight"
+   "label": "Total Gold Weight",
+   "precision": "3"
   },
   {
    "fieldname": "total_weight",
    "fieldtype": "Float",
-   "label": "Total Weight"
+   "label": "Total Weight",
+   "precision": "3"
   },
   {
    "fieldname": "items",
@@ -91,7 +93,7 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2024-08-26 14:37:16.557436",
+ "modified": "2024-08-27 09:44:48.514599",
  "modified_by": "Administrator",
  "module": "AuMMS",
  "name": "Hallmark Request",
