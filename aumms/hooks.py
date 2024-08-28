@@ -101,7 +101,7 @@ fixtures = [
 	},
 	{
 		"dt":"Workflow",
-		"filters":[["name","in",["Feasibility check", "Touch Validation Workflow", "Purchase Receipt Workflow"]]]
+		"filters":[["name","in",["Feasibility check", "Touch Validation Workflow", "Purchase Receipt Workflow","Hallmark Request Workflow"]]]
 	},
 	{
 		"dt":"Workflow Action Master",
