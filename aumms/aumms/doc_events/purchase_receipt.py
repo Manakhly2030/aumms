@@ -24,7 +24,7 @@ def purchase_receipt_on_update_after_submit(doc, method=None):
                 "additional_cost": frappe.db.get_single_value("AuMMS Settings", "hallmarking_cost_per_item")
             })
         hallmarking_entry.submit()
-        create_metal_ledger_entries_for_hallmarking(doc, False)
+        # create_metal_ledger_entries_for_hallmarking(doc, False)
         doc.custom_sent_for_hallmarking = 1
         doc.save()
     elif doc.workflow_state == "Sent for Hallmarking" and doc.custom_hallmarking_details and not doc.custom_hallmark_return:
@@ -50,7 +50,7 @@ def purchase_receipt_on_update_after_submit(doc, method=None):
                     "t_warehouse": frappe.db.exists("Warehouse", {"name":["like", "%Scrap%"]})
                 })
         hallmarked_entry.submit()
-        create_metal_ledger_entries_for_hallmarking(doc, True)
+        # create_metal_ledger_entries_for_hallmarking(doc, True)
         doc.custom_hallmark_return = 1
         doc.workflow_state = "Items Hallmarked"
         doc.save()
@@ -191,3 +191,35 @@ def set_purchase_invoice_link_to_jewellery_invoice(purchase_receipt, purchase_in
         invoice_id = frappe.db.get_value('Jewellery Invoice', { 'purchase_receipt':purchase_receipt })
         frappe.db.set_value('Jewellery Invoice', invoice_id, 'purchase_invoice', purchase_invoice)
         frappe.db.commit()
+
+
+
+def create_hallmark_request_from_purchase_receipt(doc, method=None):
+
+    if doc.workflow_state == "Sent for Hallmarking":
+        hallmark_request = frappe.new_doc("Hallmark Request")
+
+        try:
+
+            #hallmark_request.supplier = doc.supplier
+            #hallmark_request.reference = doc.name
+
+            for item in doc.items:
+                hallmark_request.append("items", {
+                    "item_code": item.item_code,
+                    "item_name": item.item_name,
+                    "gold_weight": frappe.get_value("Item", {"item_name":item.item_name},"gold_weight"),
+                    "total_weight": frappe.get_value("Item", {"item_name":item.item_name},"weight_per_unit"),
+                    "base_rate": item.rate,
+                    "amount":item.amount
+                })
+                
+            
+            hallmark_request.save()
+            # hallmark_request.submit()
+            frappe.msgprint(f"Hallmark Request {hallmark_request} Created and Submitted Successfully")
+        except Exception as e:
+                frappe.log_error(f"Failed to create Hallmark Request from Purchase Receipt {doc.name}: {str(e)}")  
+                frappe.msgprint("Failed to create Hallmark Request. Please check the error log.", indicator="red")
+
+

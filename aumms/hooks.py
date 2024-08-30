@@ -165,8 +165,14 @@ doc_events = {
 			'aumms.aumms.doc_events.purchase_receipt.purchase_receipt_on_submit'
 			],
 		'on_cancel': 'aumms.aumms.utils.cancel_metal_ledger_entries',
-		'on_update_after_submit': 'aumms.aumms.doc_events.purchase_receipt.purchase_receipt_on_update_after_submit'
+		'on_update_after_submit': [
+            # 'aumms.aumms.doc_events.purchase_receipt.purchase_receipt_on_update_after_submit',
+            'aumms.aumms.doc_events.purchase_receipt.create_hallmark_request_from_purchase_receipt'
+		]
 	},
+    #'Hallmark Request': {
+     # "on_update_after_submit":'aumms.aumms.doctype.hallmark_request.hallmark_request.on_update_after_submit'  
+	#},
 	'Sales Invoice': {
 		'on_submit': [
 			  'aumms.aumms.utils.create_metal_ledger_entries'
