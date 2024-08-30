@@ -7,54 +7,37 @@ def purchase_receipt_on_submit(doc, method):
     if doc.create_invoice_on_submit:
         create_purchase_invoice(doc)
         
-def purchase_receipt_on_update_after_submit(doc, method=None):
-    print("\n", doc.workflow_state, "\n")
-    print(doc.workflow_state == "Sent for Hallmarking", doc.custom_hallmarking_details, not doc.custom_hallmark_return)
-    if doc.workflow_state == "Sent for Hallmarking" and not doc.custom_sent_for_hallmarking:
-        hallmarking_entry = frappe.new_doc("Stock Entry")
-        hallmarking_entry.stock_entry_type = "Material Transfer"
-        hallmarking_entry.from_warehouse = frappe.db.exists("Warehouse", {"name":["like", "%Stores%"]})
-        hallmarking_entry.to_warehouse = frappe.db.exists("Warehouse", {"name":["like", "%Work In Progress%"]})
-        for item in doc.items:
-            hallmarking_entry.append("items", {
-                "item_code": item.item_code,
-                "qty": item.qty,
-                "uom": item.uom,
-                "basic_rate": item.base_rate,
-                "additional_cost": frappe.db.get_single_value("AuMMS Settings", "hallmarking_cost_per_item")
-            })
-        hallmarking_entry.submit()
-        create_metal_ledger_entries_for_hallmarking(doc, False)
-        doc.custom_sent_for_hallmarking = 1
-        doc.save()
-    elif doc.workflow_state == "Sent for Hallmarking" and doc.custom_hallmarking_details and not doc.custom_hallmark_return:
-        hallmarked_entry = frappe.new_doc("Stock Entry")
-        hallmarked_entry.stock_entry_type = "Material Transfer"
-        hallmarked_entry.from_warehouse = frappe.db.exists("Warehouse", {"name":["like", "%Work In Progress%"]})
-        hallmarked_entry.to_warehouse = frappe.db.exists("Warehouse", {"name":["like", "%Finished Goods%"]})
-        for item in doc.custom_hallmarking_details:
-            if not item.broken:
-                hallmarked_entry.append("items", {
-                    "item_code": item.item_code,
-                    "qty": frappe.db.get_value("Purchase Receipt Item", {"item_code": item.item_code, "parent":doc.name}, "qty"),
-                    "uom": frappe.db.get_value("Purchase Receipt Item", {"item_code": item.item_code, "parent":doc.name}, "uom"),
-                    "basic_rate": frappe.db.get_value("Purchase Receipt Item", {"item_code": item.item_code, "parent":doc.name}, "base_rate"),
-                })
-                frappe.db.get_value("AuMMS Item", item.item_code, "hallmarked", 1)
-            else:
-                hallmarked_entry.append("items", {
-                    "item_code": item.item_code,
-                    "qty": frappe.db.get_value("Purchase Receipt Item", {"item_code": item.item_code, "parent":doc.name}, "qty"),
-                    "uom": frappe.db.get_value("Purchase Receipt Item", {"item_code": item.item_code, "parent":doc.name}, "uom"),
-                    "basic_rate": frappe.db.get_value("Purchase Receipt Item", {"item_code": item.item_code, "parent":doc.name}, "base_rate"),
-                    "t_warehouse": frappe.db.exists("Warehouse", {"name":["like", "%Scrap%"]})
-                })
-        hallmarked_entry.submit()
-        create_metal_ledger_entries_for_hallmarking(doc, True)
-        doc.custom_hallmark_return = 1
-        doc.workflow_state = "Items Hallmarked"
-        doc.save()
-        
+def purchase_receipt_on_update_after_submit(doc, method):
+    """
+    Create Hallmark Request On Submission of Purchase Receipt
+    """
+    # Create a new Hallmark Request document
+    hallmark = frappe.new_doc('Hallmark Request')
+    
+    # Assign values from Purchase Receipt to Hallmark Request
+    hallmark.supplier = doc.supplier
+    hallmark.supplier_name = doc.supplier_name
+    hallmark.posting_date = doc.posting_date
+    
+    # Populate the items table in Hallmark Request from Purchase Receipt items
+    for item in doc.items:
+        hallmark.append('items', {
+            'item_code': item.item_code,
+            'item_name': item.item_name,
+            # Adjusted to match the correct field
+            
+            'total_weight': item.total_weight,  # Add other necessary fields
+            
+        })
+    
+    # Save and submit the Hallmark Request
+   
+    hallmark.submit()
+    
+    frappe.msgprint("Hallmark Request has been created and submitted successfully.")
+
+
+   
 @frappe.whitelist()
 def create_metal_ledger_entries_for_hallmarking(doc, hallmark_return=False):
     """

@@ -1,6 +1,7 @@
 {
  "actions": [],
  "allow_rename": 1,
+ "autoname": "HR.#####",
  "creation": "2024-08-26 12:45:24.340296",
  "doctype": "DocType",
  "engine": "InnoDB",
@@ -10,7 +11,7 @@
   "reference",
   "column_break_vm3p",
   "supplier",
-  "hallmarking_cost",
+  "hallmarking_cost", 
   "section_break_jn0z",
   "items",
   "section_break_3dcx",
@@ -111,10 +112,11 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2024-08-27 10:10:36.038471",
+ "modified": "2024-08-29 10:45:55.042870",
  "modified_by": "Administrator",
  "module": "AuMMS",
  "name": "Hallmark Request",
+ "naming_rule": "Expression (old style)",
  "owner": "Administrator",
  "permissions": [
   {
