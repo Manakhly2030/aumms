@@ -33,42 +33,64 @@ frappe.ui.form.on("Jewellery Receipt", {
   board_rate: function (frm) {
     frm.events.update_item_details_table(frm);
   },
+  supplier: function (frm) {
+    frm.events.update_item_details_table(frm);
+  },
   update_item_details_table: function (frm) {
     if (frm.doc.item_details) {
-      frm.doc.item_details.forEach(function (item) {
-        frappe.model.set_value(
-          item.doctype,
-          item.name,
-          "item_category",
-          frm.doc.item_category
-        );
-        frappe.model.set_value(
-          item.doctype,
-          item.name,
-          "item_type",
-          frm.doc.item_type
-        );
-        frappe.model.set_value(
-          item.doctype,
-          item.name,
-          "item_group",
-          frm.doc.item_group
-        );
-        frappe.model.set_value(
-          item.doctype,
-          item.name,
-          "purity",
-          frm.doc.purity
-        );
-        frappe.model.set_value(
-          item.doctype,
-          item.name,
-          "board_rate",
-          frm.doc.board_rate
-        );
-      });
+      let making_charge = 0;
+
+      const updateItems = () => {
+        frm.doc.item_details.forEach(function (item) {
+          frappe.model.set_value(
+            item.doctype,
+            item.name,
+            "item_category",
+            frm.doc.item_category
+          );
+          frappe.model.set_value(
+            item.doctype,
+            item.name,
+            "item_type",
+            frm.doc.item_type
+          );
+          frappe.model.set_value(
+            item.doctype,
+            item.name,
+            "item_group",
+            frm.doc.item_group
+          );
+          frappe.model.set_value(
+            item.doctype,
+            item.name,
+            "purity",
+            frm.doc.purity
+          );
+          frappe.model.set_value(
+            item.doctype,
+            item.name,
+            "board_rate",
+            frm.doc.board_rate
+          );
+          frappe.model.set_value(
+            item.doctype,
+            item.name,
+            "making_chargein_percentage",
+            making_charge
+          );
+        });
+        frm.refresh_fields();
+      };
+
+      if (frm.doc.supplier && frm.doc.item_group) {
+        frm.call("get_supplier_touch").then((r) => {
+          making_charge = r.message;
+          updateItems();
+        });
+      } else {
+        updateItems();
+      }
     }
-    frm.refresh_fields();
   },
 
   // has_stone: function (frm) {
@@ -161,6 +183,11 @@ frappe.ui.form.on("Jewellery Item Receipt", {
         "amount_without_making_charge",
         amount_without_making_charge
       );
+    }
+    if (d.amount_without_making_charge && d.making_chargein_percentage) {
+      let making_charge =
+        d.amount_without_making_charge * (d.making_chargein_percentage / 100);
+      frappe.model.set_value(cdt, cdn, "making_charge", making_charge);
     }
   },
   making_chargein_percentage: function (frm, cdt, cdn) {

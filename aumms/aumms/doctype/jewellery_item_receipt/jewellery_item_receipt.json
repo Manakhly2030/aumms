@@ -23,6 +23,8 @@
   "board_rate",
   "amount_without_making_charge",
   "amount",
+  "hallmarked",
+  "huid",
   "section_break_lkhd",
   "has_stone",
   "stone",
@@ -160,6 +162,7 @@
    "precision": "2"
   },
   {
+   "default": "Gram",
    "fieldname": "uom",
    "fieldtype": "Link",
    "label": "UOM",
@@ -193,6 +196,7 @@
    "label": "Stone Weight (Gold Weight UOM)"
   },
   {
+   "default": "Gram",
    "depends_on": "eval: doc.has_stone",
    "fieldname": "stone_uom",
    "fieldtype": "Link",
@@ -204,12 +208,25 @@
    "fieldname": "rate",
    "fieldtype": "Currency",
    "label": "Rate"
+  },
+  {
+   "default": "0",
+   "fieldname": "hallmarked",
+   "fieldtype": "Check",
+   "label": "Hallmarked"
+  },
+  {
+   "depends_on": "eval: doc.hallmarked",
+   "fieldname": "huid",
+   "fieldtype": "Data",
+   "label": "HUID",
+   "mandatory_depends_on": "eval: doc.hallmarked"
   }
  ],
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2024-08-23 09:51:41.285529",
+ "modified": "2024-08-31 11:10:52.640578",
  "modified_by": "Administrator",
  "module": "AuMMS",
  "name": "Jewellery Item Receipt",

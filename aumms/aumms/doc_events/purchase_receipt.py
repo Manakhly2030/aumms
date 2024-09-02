@@ -8,7 +8,6 @@ def purchase_receipt_on_submit(doc, method):
         create_purchase_invoice(doc)
         
 def purchase_receipt_on_update_after_submit(doc, method=None):
-    print("\n", doc.workflow_state, "\n")
     print(doc.workflow_state == "Sent for Hallmarking", doc.custom_hallmarking_details, not doc.custom_hallmark_return)
     if doc.workflow_state == "Sent for Hallmarking" and not doc.custom_sent_for_hallmarking:
         hallmarking_entry = frappe.new_doc("Stock Entry")
@@ -197,14 +196,16 @@ def set_purchase_invoice_link_to_jewellery_invoice(purchase_receipt, purchase_in
 def create_hallmark_request_from_purchase_receipt(doc, method=None):
 
     if doc.workflow_state == "Sent for Hallmarking":
-        hallmark_request = frappe.new_doc("Hallmark Request")
 
         try:
-
-            #hallmark_request.supplier = doc.supplier
-            #hallmark_request.reference = doc.name
+                
+            hallmark_request = frappe.new_doc("Hallmark Request")
+            hallmark_request.reference_type = "Purchase Receipt"
+            hallmark_request.reference = doc.name
 
             for item in doc.items:
+                if frappe.db.get_value("AuMMS Item", item.item_code, "hallmarked"):
+                    continue
                 hallmark_request.append("items", {
                     "item_code": item.item_code,
                     "item_name": item.item_name,
@@ -216,8 +217,7 @@ def create_hallmark_request_from_purchase_receipt(doc, method=None):
                 
             
             hallmark_request.save()
-            # hallmark_request.submit()
-            frappe.msgprint(f"Hallmark Request {hallmark_request} Created and Submitted Successfully")
+            frappe.msgprint(f"Hallmark Request {hallmark_request} Created", alert=True)
         except Exception as e:
                 frappe.log_error(f"Failed to create Hallmark Request from Purchase Receipt {doc.name}: {str(e)}")  
                 frappe.msgprint("Failed to create Hallmark Request. Please check the error log.", indicator="red")

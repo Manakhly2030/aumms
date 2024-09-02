@@ -7,21 +7,18 @@
  "engine": "InnoDB",
  "field_order": [
   "section_break_ey9e",
-  "from",
+  "reference_type",
   "reference",
   "column_break_vm3p",
   "supplier",
-  "hallmarking_cost",
+  "hallmarking_warehouse",
   "section_break_jn0z",
   "items",
+  "hallmark_return_details",
   "section_break_3dcx",
   "amended_from",
   "column_break_qpnc",
-  "total_hallmarking_cost",
-  "total_gold_value",
-  "total_items_value",
-  "total_gold_weight",
-  "total_weight"
+  "total_hallmarking_cost"
  ],
  "fields": [
   {
@@ -39,16 +36,10 @@
    "search_index": 1
   },
   {
-   "fieldname": "from",
-   "fieldtype": "Link",
-   "label": "From",
-   "options": "DocType"
-  },
-  {
    "fieldname": "reference",
    "fieldtype": "Dynamic Link",
    "label": "Reference",
-   "options": "from"
+   "options": "reference_type"
   },
   {
    "fieldname": "supplier",
@@ -57,34 +48,9 @@
    "options": "Supplier"
   },
   {
-   "fieldname": "hallmarking_cost",
-   "fieldtype": "Currency",
-   "label": "Hallmarking Cost"
-  },
-  {
    "fieldname": "total_hallmarking_cost",
    "fieldtype": "Currency",
    "label": "Total Hallmarking Cost"
-  },
-  {
-   "fieldname": "total_gold_value",
-   "fieldtype": "Currency",
-   "label": "Total Gold Value"
-  },
-  {
-   "fieldname": "total_items_value",
-   "fieldtype": "Currency",
-   "label": "Total Items Value"
-  },
-  {
-   "fieldname": "total_gold_weight",
-   "fieldtype": "Float",
-   "label": "Total Gold Weight"
-  },
-  {
-   "fieldname": "total_weight",
-   "fieldtype": "Float",
-   "label": "Total Weight"
   },
   {
    "fieldname": "items",
@@ -107,12 +73,32 @@
   {
    "fieldname": "section_break_jn0z",
    "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "reference_type",
+   "fieldtype": "Link",
+   "label": "From",
+   "options": "DocType"
+  },
+  {
+   "fetch_from": "supplier.custom_hallmarking_warehouse",
+   "fieldname": "hallmarking_warehouse",
+   "fieldtype": "Link",
+   "label": "Hallmarking Warehouse",
+   "options": "Warehouse"
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "hallmark_return_details",
+   "fieldtype": "Table",
+   "label": "Hallmark Return Details",
+   "options": "Hallmark Return Detail"
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2024-08-27 13:44:25.925535",
+ "modified": "2024-09-02 13:26:45.618579",
  "modified_by": "Administrator",
  "module": "AuMMS",
  "name": "Hallmark Request",

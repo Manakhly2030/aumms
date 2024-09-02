@@ -1,6 +1,7 @@
 # Copyright (c) 2023, efeone and contributors
 # For license information, please see license.txt
 
+from aumms.aumms.doc_events.item import create_qr
 import frappe
 from frappe.model.document import Document
 from frappe import _
@@ -117,4 +118,6 @@ class AuMMSItem(Document):
 		elif frappe.db.exists("Item", item):
 			# case of updating existing Item
 			item_doc.save(ignore_permissions = True)
+			if self.hallmarked:
+				create_qr(item_doc)
 		frappe.db.commit()

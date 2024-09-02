@@ -12,6 +12,7 @@
   "hallmark_reference",
   "column_break_zxwm",
   "hallmarked",
+  "huid",
   "section_break_bafp",
   "item_code",
   "item_name",
@@ -370,10 +371,11 @@
    "label": "Is Raw Material"
   },
   {
+   "depends_on": "eval: doc.hallmarked",
    "fieldname": "hallmark_reference",
    "fieldtype": "Link",
    "label": "Hallmark Reference",
-   "options": "Stock Entry",
+   "options": "Hallmark Request",
    "read_only": 1
   },
   {
@@ -390,11 +392,17 @@
   {
    "fieldname": "section_break_bafp",
    "fieldtype": "Section Break"
+  },
+  {
+   "depends_on": "eval: doc.hallmarked",
+   "fieldname": "huid",
+   "fieldtype": "Data",
+   "label": "HUID"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-08-21 14:58:58.051356",
+ "modified": "2024-08-31 11:15:37.655549",
  "modified_by": "Administrator",
  "module": "AuMMS",
  "name": "AuMMS Item",

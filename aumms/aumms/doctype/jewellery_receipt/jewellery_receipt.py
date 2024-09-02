@@ -56,27 +56,12 @@ class JewelleryReceipt(Document):
 			aumms_item.gold_weight = item_detail.gold_weight
 			aumms_item.item_category = item_detail.item_category
 			aumms_item.is_purchase_item = 1
+   
+			if item_detail.hallmarked:
+				aumms_item.hallmarked = 1
+				aumms_item.huid = item_detail.huid
 
 			if item_detail.has_stone:
-				# if item_detail.single_stone:
-				# 	aumms_item.append('stone_details', {
-				# 		'stone_weight': item_detail.stone_weight,
-				# 		'stone_charge': item_detail.stone_charge,
-				# 		'item_name': item_detail.stone,
-				# 		'stone_type': item_detail.stone,
-				# 	})
-				# else:
-				# 	stones = item_detail.stones.split(',') if item_detail.stones else []
-				# 	individual_stone_weight = item_detail.individual_stone_weight
-				# 	if individual_stone_weight:
-				# 		stone_weight = individual_stone_weight.split(',')
-				# 		for stone, weight in zip(stones, stone_weight):
-				# 			aumms_item.append('stone_details', {
-				# 				'stone_weight': float(weight),
-				# 				'stone_charge': item_detail.unit_stone_charge * float(weight),
-				# 				'item_name': stone,
-				# 				'stone_type': stone,
-				# 			})
 				for stone in self.item_wise_stone_details:
 					aumms_item.append("stone_details", {
 						"stone_weight": stone.stone_weight,
@@ -105,8 +90,8 @@ class JewelleryReceipt(Document):
 					'uom': "Nos",
 					"weight_per_unit": item_detail.gold_weight,
 					"weight_uom": item_detail.uom,
-					'base_rate': self.board_rate,
-					'rate': item_detail.amount / item_detail.gold_weight,
+					'base_rate': item_detail.amount,
+					'rate': item_detail.amount,
 					'custom_making_charge': item_detail.making_charge,
 					'custom_stone_weight': item_detail.stone_weight,
 					'custom_stone_charge': item_detail.stone_charge,
@@ -158,3 +143,7 @@ class JewelleryReceipt(Document):
 				need_approval = True
 				break
 		return need_approval
+
+	@frappe.whitelist()
+	def get_supplier_touch(self):
+		return frappe.db.get_value("Supplier Touch Record", {"parent":self.supplier, "item_group":self.item_group}, "touch_percent")

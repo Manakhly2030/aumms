@@ -140,6 +140,8 @@ def get_existing_uoms(uoms):
     return uoms_list
 
 def create_qr(doc, method=None):
+    if not frappe.db.exists("AuMMS Item", {"name":doc.name, "hallmarked":1}):
+        return
     # Creating a fied for QR code if it doesn't exist
     if not hasattr(doc, "item_qr"):
         create_custom_fields(
