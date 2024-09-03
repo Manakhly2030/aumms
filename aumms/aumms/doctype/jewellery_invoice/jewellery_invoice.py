@@ -234,7 +234,7 @@ def create_purchase_receipt(source_name, supplier, target_doc=None):
 	transaction_type = frappe.db.get_value('Jewellery Invoice', source_name, 'transaction_type')
 	if transaction_type == 'Purchase':
 		frappe.db.set_value('Jewellery Invoice', source_name, 'status', 'Invoiced')
-	target_doc.submit()
+	target_doc.save()
 	frappe.msgprint(('Purchase Receipt created'), indicator="green", alert=1)
 	frappe.db.commit()
 	return target_doc.name

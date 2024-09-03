@@ -119,7 +119,7 @@ def get_data(filters):
 			doc.party_type,
 			doc.party,
 			doc.item_type,
-			doc.purity,
+			doc.purity or "22k", # CHANGE THIS!
 			doc.stock_uom,
 			doc.in_qty,
 			doc.out_qty,
@@ -266,6 +266,8 @@ def get_purity_converted_qty(ledger_purity, in_qty, out_qty, filter_purity):
 		"Purity", filter_purity, "purity_percentage"
 	)
 	purity_converted_in_qty = 0
+	if not ledger_purity_percentage:
+		ledger_purity_percentage = 91.67 # CHANGE THIS!
 	if in_qty:
 		purity_converted_in_qty = (
 			in_qty * ledger_purity_percentage
