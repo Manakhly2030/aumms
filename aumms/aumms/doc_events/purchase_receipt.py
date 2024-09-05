@@ -6,9 +6,9 @@ def purchase_receipt_on_submit(doc, method):
     ''' Method to trigger Purchase Receipt on_submit '''
     if doc.create_invoice_on_submit:
         create_purchase_invoice(doc)
+    purchase_receipt_on_update_after_submit(doc, method)
         
 def purchase_receipt_on_update_after_submit(doc, method=None):
-    print(doc.workflow_state == "Sent for Hallmarking", doc.custom_hallmarking_details, not doc.custom_hallmark_return)
     if doc.workflow_state == "Sent for Hallmarking" and not doc.custom_sent_for_hallmarking:
         hallmarking_entry = frappe.new_doc("Stock Entry")
         hallmarking_entry.stock_entry_type = "Material Transfer"
@@ -222,4 +222,29 @@ def create_hallmark_request_from_purchase_receipt(doc, method=None):
                 frappe.log_error(f"Failed to create Hallmark Request from Purchase Receipt {doc.name}: {str(e)}")  
                 frappe.msgprint("Failed to create Hallmark Request. Please check the error log.", indicator="red")
 
+def create_melting_request_from_purchase_receipt(doc, method=None):
 
+    if doc.workflow_state == "Issued for Melting":
+
+        try:
+                
+            melting_request = frappe.new_doc("Melting Request")
+            melting_request.reference_type = "Purchase Receipt"
+            melting_request.reference = doc.name
+
+            for item in doc.items:
+                melting_request.append("items", {
+                    "item_code": item.item_code,
+                    "item_name": item.item_name,
+                    "gold_weight": frappe.get_value("Item", {"item_name":item.item_name},"gold_weight"),
+                    "total_weight": item.total_weight,
+                    "base_rate": item.rate,
+                    "amount":item.amount
+                })
+                
+            
+            melting_request.save()
+            frappe.msgprint(f"Melting Request {melting_request} Created", alert=True)
+        except Exception as e:
+                frappe.log_error(f"Failed to create Hallmark Request from Purchase Receipt {doc.name}: {str(e)}")  
+                frappe.msgprint("Failed to create Hallmark Request. Please check the error log.", indicator="red")

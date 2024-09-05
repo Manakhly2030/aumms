@@ -167,7 +167,8 @@ doc_events = {
 		'on_cancel': 'aumms.aumms.utils.cancel_metal_ledger_entries',
 		'on_update_after_submit': [
             # 'aumms.aumms.doc_events.purchase_receipt.purchase_receipt_on_update_after_submit',
-            'aumms.aumms.doc_events.purchase_receipt.create_hallmark_request_from_purchase_receipt'
+            'aumms.aumms.doc_events.purchase_receipt.create_hallmark_request_from_purchase_receipt',
+            'aumms.aumms.doc_events.purchase_receipt.create_melting_request_from_purchase_receipt'
 		]
 	},
     #'Hallmark Request': {

@@ -1,0 +1,120 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "format:MLR-{YYYY}-{####}",
+ "creation": "2024-09-03 05:48:05.225146",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "reference_type",
+  "reference",
+  "column_break_yzdt",
+  "assay_center",
+  "assay_center_warehouse",
+  "section_break_vqbx",
+  "items",
+  "gold_weight_detail",
+  "section_break_lqcq",
+  "amended_from",
+  "column_break_uvih",
+  "total_melting_cost"
+ ],
+ "fields": [
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Melting Request",
+   "print_hide": 1,
+   "read_only": 1,
+   "search_index": 1
+  },
+  {
+   "fieldname": "reference_type",
+   "fieldtype": "Link",
+   "label": "From",
+   "options": "DocType"
+  },
+  {
+   "fieldname": "reference",
+   "fieldtype": "Dynamic Link",
+   "label": "Reference",
+   "options": "reference_type"
+  },
+  {
+   "fieldname": "column_break_yzdt",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "assay_center",
+   "fieldtype": "Link",
+   "label": "Assay Center",
+   "options": "Supplier"
+  },
+  {
+   "fetch_from": "assay_center.custom_assay_center_warehouse",
+   "fieldname": "assay_center_warehouse",
+   "fieldtype": "Link",
+   "label": "Assay Center Warehouse",
+   "options": "Warehouse"
+  },
+  {
+   "fieldname": "section_break_vqbx",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "items",
+   "fieldtype": "Table",
+   "label": "Items",
+   "options": "Melting Items Detail"
+  },
+  {
+   "fieldname": "section_break_lqcq",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "column_break_uvih",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "total_melting_cost",
+   "fieldtype": "Currency",
+   "label": "Total Melting Cost"
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "gold_weight_detail",
+   "fieldtype": "Table",
+   "label": "Gold Weight Detail",
+   "options": "Melting Loss"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [],
+ "modified": "2024-09-03 06:52:31.827345",
+ "modified_by": "Administrator",
+ "module": "AuMMS",
+ "name": "Melting Request",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

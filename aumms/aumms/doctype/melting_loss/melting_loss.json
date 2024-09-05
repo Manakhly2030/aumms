@@ -1,0 +1,60 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2024-09-03 06:49:26.296518",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "item",
+  "gold_weight_loss_for_testing",
+  "gold_weight_loss_after_melting",
+  "final_gold_weight"
+ ],
+ "fields": [
+  {
+   "allow_on_submit": 1,
+   "fieldname": "gold_weight_loss_for_testing",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Gold Weight Loss for Testing",
+   "precision": "3"
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "final_gold_weight",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Final Gold Weight (100%)",
+   "precision": "3"
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "item",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Item",
+   "options": "Item"
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "gold_weight_loss_after_melting",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Gold Weight Loss After Melting",
+   "precision": "3"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2024-09-03 09:31:46.706523",
+ "modified_by": "Administrator",
+ "module": "AuMMS",
+ "name": "Melting Loss",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}
