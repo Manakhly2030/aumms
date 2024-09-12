@@ -19,6 +19,7 @@
   "quantity",
   "section_break_vxux",
   "item_details",
+  "item_wise_stone_details",
   "amended_from"
  ],
  "fields": [
@@ -66,8 +67,8 @@
    "fieldtype": "Float",
    "in_list_view": 1,
    "label": "Board Rate",
-   "precision": "2",
-   "reqd": 1
+   "mandatory_depends_on": "eval: doc.is_fix",
+   "precision": "2"
   },
   {
    "default": "Today",
@@ -105,7 +106,7 @@
    "reqd": 1
   },
   {
-   "default": "0",
+   "default": "1",
    "fieldname": "is_fix",
    "fieldtype": "Check",
    "label": "Fixed Charge"
@@ -114,12 +115,19 @@
    "fieldname": "quantity",
    "fieldtype": "Int",
    "label": "Quantity"
+  },
+  {
+   "fieldname": "item_wise_stone_details",
+   "fieldtype": "Table",
+   "label": "Item Wise Stone Details",
+   "options": "Item Wise Stone Details",
+   "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2024-03-19 12:52:08.855007",
+ "modified": "2024-08-20 10:13:09.368757",
  "modified_by": "Administrator",
  "module": "AuMMS",
  "name": "Jewellery Receipt",

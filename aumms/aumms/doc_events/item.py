@@ -1,15 +1,14 @@
-import os
 import io
 import json
-import frappe
-from frappe import _
+import os
 from datetime import date
-from pyqrcode import create
-from base64 import b64encode
-from pyqrcode import create as qr_create
-from frappe.utils.data import get_url_to_form
+
+import frappe
 from aumms.aumms.utils import get_conversion_factor
+from frappe import _
 from frappe.custom.doctype.custom_field.custom_field import create_custom_fields
+from pyqrcode import create
+
 
 @frappe.whitelist()
 def validate_item(doc, method):
@@ -41,8 +40,12 @@ def uom_is_a_purity_uom(uom):
             uom: name of uom document
         output: a message iff uom is not a purity uom
     """
-    if not frappe.db.exists('UOM', {'name': uom, 'is_purity_uom': 1}):
-        frappe.throw(_('{} is not a purity uom'.format(uom)))
+    pass
+    #
+    # This is kept in pass because the integration of Nos as stock qty is ongoing
+    #
+    # if not frappe.db.exists('UOM', {'name': uom, 'is_purity_uom': 1}):
+    #     frappe.throw(_('{} is not a purity uom'.format(uom)))
 
 @frappe.whitelist()
 def get_purity_uom():

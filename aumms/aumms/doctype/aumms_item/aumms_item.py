@@ -3,7 +3,6 @@
 
 import frappe
 from frappe.model.document import Document
-from frappe import _
 
 #Fields used to map AuMMS Item to Item
 aumms_item_fields = ['item_code', 'item_name', 'item_type', 'stock_uom', 'disabled', 'is_stock_item', 'making_charge_based_on', 'making_charge_percentage', 'making_charge', 'purity', 'purity_percentage', 'is_purity_item', 'description', 'weight_per_unit', 'weight_uom', 'is_purchase_item', 'purchase_uom', 'is_sales_item', 'sales_uom', 'gold_weight', 'has_stone', 'stone_weight', 'stone_charge']
@@ -29,7 +28,7 @@ class AuMMSItem(Document):
 		if not self.stone_charge and self.is_stone_item:
 			frappe.throw(_('Please Enter Stone Charge'))"""
 	def validate_gold_weight(self):
-		if not self.gold_weight and not self.has_stone:
+		if not self.gold_weight and not self.is_stone_item:
 			frappe.throw("Gold Weight is mandatory")
 
 	def after_insert(self):

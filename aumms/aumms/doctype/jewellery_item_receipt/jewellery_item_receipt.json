@@ -11,18 +11,10 @@
   "item_code",
   "item_type",
   "item_group",
-  "has_stone",
-  "single_stone",
-  "multi_stone",
-  "stone",
-  "add_multi_stone",
-  "stones",
   "gold_weight",
   "uom",
-  "unit_stone_charge",
-  "stone_weight",
-  "individual_stone_weight",
   "column_break_juco",
+  "stone_weight_gold_weight_uom",
   "net_weight",
   "stone_charge",
   "making_chargein_percentage",
@@ -30,7 +22,19 @@
   "purity",
   "board_rate",
   "amount_without_making_charge",
-  "amount"
+  "amount",
+  "hallmarked",
+  "huid",
+  "section_break_lkhd",
+  "has_stone",
+  "stone",
+  "stone_weight",
+  "stone_uom",
+  "rate",
+  "add_stone",
+  "column_break_piui",
+  "stones",
+  "individual_stone_weight"
  ],
  "fields": [
   {
@@ -54,10 +58,9 @@
    "reqd": 1
   },
   {
-   "depends_on": "eval:doc.stone",
+   "depends_on": "eval:doc.has_stone",
    "fieldname": "stone_weight",
    "fieldtype": "Float",
-   "in_list_view": 1,
    "label": "Stone Weight",
    "precision": "2"
   },
@@ -72,7 +75,7 @@
    "fieldtype": "Column Break"
   },
   {
-   "depends_on": "eval:doc.single_stone == 1",
+   "depends_on": "eval:doc.has_stone",
    "fieldname": "stone",
    "fieldtype": "Link",
    "label": "Stone",
@@ -104,7 +107,7 @@
    "default": "0",
    "fieldname": "has_stone",
    "fieldtype": "Check",
-   "label": "has Stone"
+   "label": "Has Stone"
   },
   {
    "fieldname": "amount_without_making_charge",
@@ -118,12 +121,6 @@
    "label": "Making Charge(In Percentage)",
    "precision": "1",
    "reqd": 1
-  },
-  {
-   "depends_on": "eval:doc.has_stone == 1",
-   "fieldname": "unit_stone_charge",
-   "fieldtype": "Int",
-   "label": "Unit Stone Charge"
   },
   {
    "fieldname": "individual_stone_weight",
@@ -165,19 +162,7 @@
    "precision": "2"
   },
   {
-   "default": "0",
-   "depends_on": "eval:doc.has_stone && !doc.multi_stone == 1",
-   "fieldname": "single_stone",
-   "fieldtype": "Check",
-   "label": "Single Stone"
-  },
-  {
-   "depends_on": "eval:doc.has_stone && doc.multi_stone == 1",
-   "fieldname": "add_multi_stone",
-   "fieldtype": "Button",
-   "label": "Add Multi Stone"
-  },
-  {
+   "default": "Gram",
    "fieldname": "uom",
    "fieldtype": "Link",
    "label": "UOM",
@@ -185,23 +170,63 @@
    "reqd": 1
   },
   {
-   "depends_on": "eval:doc.has_stone && doc.multi_stone == 1",
+   "depends_on": "eval:doc.has_stone",
    "fieldname": "stones",
    "fieldtype": "Data",
    "label": "Stones"
   },
   {
+   "fieldname": "section_break_lkhd",
+   "fieldtype": "Section Break"
+  },
+  {
+   "depends_on": "eval:doc.has_stone",
+   "fieldname": "add_stone",
+   "fieldtype": "Button",
+   "label": "Add Stone"
+  },
+  {
+   "fieldname": "column_break_piui",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "stone_weight_gold_weight_uom",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Stone Weight (Gold Weight UOM)"
+  },
+  {
+   "default": "Gram",
+   "depends_on": "eval: doc.has_stone",
+   "fieldname": "stone_uom",
+   "fieldtype": "Link",
+   "label": "UOM",
+   "options": "UOM"
+  },
+  {
+   "depends_on": "eval: doc.has_stone",
+   "fieldname": "rate",
+   "fieldtype": "Currency",
+   "label": "Rate"
+  },
+  {
    "default": "0",
-   "depends_on": "eval:doc.has_stone && !doc.single_stone == 1",
-   "fieldname": "multi_stone",
+   "fieldname": "hallmarked",
    "fieldtype": "Check",
-   "label": "Multi Stone"
+   "label": "Hallmarked"
+  },
+  {
+   "depends_on": "eval: doc.hallmarked",
+   "fieldname": "huid",
+   "fieldtype": "Data",
+   "label": "HUID",
+   "mandatory_depends_on": "eval: doc.hallmarked"
   }
  ],
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2024-03-20 11:55:02.622652",
+ "modified": "2024-08-31 11:10:52.640578",
  "modified_by": "Administrator",
  "module": "AuMMS",
  "name": "Jewellery Item Receipt",

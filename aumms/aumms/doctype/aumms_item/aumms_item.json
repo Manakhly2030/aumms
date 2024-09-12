@@ -93,7 +93,8 @@
    "fieldname": "item_type",
    "fieldtype": "Link",
    "label": "Item Type",
-   "options": "Item Type"
+   "options": "Item Type",
+   "reqd": 1
   },
   {
    "default": "0",
@@ -132,7 +133,7 @@
   },
   {
    "default": "0",
-   "fetch_from": "item_group.is_purity_item",
+   "fetch_from": "item_type.is_purity_item",
    "fieldname": "is_purity_item",
    "fieldtype": "Check",
    "hidden": 1,
@@ -368,7 +369,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-03-28 09:47:38.898756",
+ "modified": "2024-09-06 11:45:18.351645",
  "modified_by": "Administrator",
  "module": "AuMMS",
  "name": "AuMMS Item",
